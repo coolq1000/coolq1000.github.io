@@ -208,4 +208,4 @@ let obj = {
     ]
 }
 
-engine = new Engine(obj, {'FPS': 24, 'FOV': 0.8, 'resScale': 1});
+engine = new Engine(obj, {'FPS': 60, 'FOV': 0.8, 'resScale': 1});
