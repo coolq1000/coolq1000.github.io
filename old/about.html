@@ -1,0 +1,96 @@
+<html>
+<head>
+<style>
+
+body {
+  margin: 0;
+  background-color: #CACACA;
+}
+
+.content {
+  margin-left: 25%;
+  padding: 1px 16px;
+  height: 1000px;
+  border-radius: 5px 0px 0px 5px;
+  background-color: #CDCDCD;
+  box-shadow: 0px 0px 25px 2px #AAA;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0px 5px 5px 0px;
+    width: 200px;
+    background-color: #A09180;
+    height: 100%;
+    position: fixed;
+    overflow: auto;
+    box-shadow: 0px 0px 25px 1px #999;
+}
+
+li a {
+    display: block;
+    color: #012231;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: #C0B3A0;
+    transition: 0.1s;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #DDD;
+    color: #111;
+    padding: 8px 32px;
+    transition: 0.2s;
+}
+
+.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.active:hover {
+    background-color: #3A8E40;
+    color: white;
+}
+
+p {
+  color: #222;
+}
+
+h1 {
+  color: #222;
+}
+
+h2 {
+  color: #222;
+}
+
+h3 {
+  color: #222;
+}
+</style>
+
+</head>
+
+<body>
+<ul>
+  <li><a class="nav" href="index.html">Home</a></li>
+  <li><a class="nav" href="news.html">News</a></li>
+  <li><a class="nav" href="contact.html">Contact</a></li>
+  <li><a class="nav active" class="active" href="about.html">About</a></li>
+</ul>
+
+<div class="content">
+  <h1 style="text-align: center;">About</h1>
+  <br>
+  <h2>I am a programmer, I find certain things interesting such as:</h2>
+  <h3>- A 3D raytracer</h3>
+  <h3>- A 2.5D raycaster</h3>
+  <h3>- A GB emulator</h3>
+  <h3>- A Chip-8 emulator</h3>
+</div>
+</body>
+</html>
