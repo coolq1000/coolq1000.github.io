@@ -33,7 +33,14 @@ class Engine
         this.zoom = 5;
         this.forwardVel = 0;
         this.canvas.addEventListener('mousemove', this.mouseEvent.bind(this))
-        window.addEventListener('DOMMouseScroll', this.scrollEvent.bind(this));
+
+        var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+
+        if (document.attachEvent) //if IE (and Opera depending on user setting)
+            document.attachEvent("on"+mousewheelevt, this.scrollEvent.bind(this))
+        else if (document.addEventListener) //WC3 browsers
+            document.addEventListener(mousewheelevt, this.scrollEvent.bind(this), false)
+
         window.addEventListener('keydown', this.keyboardEvent.bind(this));
         this.canvas.oncontextmenu = function(e) {return false;}
         setInterval(this.update.bind(this), 1000 / this.FPS);
@@ -52,7 +59,13 @@ class Engine
 
     scrollEvent(evt)
     {
-        this.forwardVel += evt.detail / 10;
+        if (!evt.detail)
+        {
+            this.forwardVel -= evt.wheelDelta / 500;
+        } else
+        {
+            this.forwardVel += evt.detail / 10;
+        }
     }
 
     mouseEvent(evt)
@@ -132,8 +145,6 @@ class Engine
 
     draw()
     {
-        this.ctx.fillStyle = '#DDD';
-        this.ctx.fillRect(0, 0, this.width, this.height);
         this.obj['tris'].sort(this.sortTris.bind(this));
         for (var i_tri = 0; i_tri < this.obj['tris'].length; i_tri++)
         {
@@ -152,21 +163,15 @@ class Engine
             }
             this.ctx.beginPath();
             this.ctx.fillStyle = '#222';
+            this.ctx.strokeStyle = '#444';
+            this.ctx.lineWidth = 1;
             for (var i_point = 0; i_point < points.length; i_point++)
             {
                 this.ctx.lineTo(points[i_point][0], points[i_point][1]);
             }
-            this.ctx.closePath();
-            this.ctx.fill();
-            this.ctx.beginPath();
-            this.ctx.strokeStyle = '#555';
-            this.ctx.lineWidth = 0.05;
-            for (var i_point = 0; i_point < points.length; i_point++)
-            {
-                this.ctx.lineTo(Math.round(points[i_point][0]), Math.round(points[i_point][1]));
-            }
-            this.ctx.closePath();
             this.ctx.stroke();
+            this.ctx.fill();
+            this.ctx.closePath();
         }
     }
 
@@ -208,4 +213,4 @@ let obj = {
     ]
 }
 
-engine = new Engine(obj, {'FPS': 60, 'FOV': 0.8, 'resScale': 1});
+let engine = new Engine(obj, {'FPS': 60, 'FOV': 0.8, 'resScale': 1});
